@@ -1,3 +1,4 @@
+
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------- Docx Testing ---------------------------------------------
@@ -7,9 +8,9 @@
 import docx
 
 # Identifying the file location of the template
-file = r'C:\Users\us59114\Desktop\Grant Thornton\Resume\Reformat\Target Resume Template2.docx'
+file = 'Target Resume Template.docx'
 # Identifying an output file location
-fileout = r'C:\Users\us59114\Desktop\Grant Thornton\Resume\Output Testing.docx'
+fileout = 'Output Testing.docx'
 
 # Example of data.. would be replaced by the output from the scraping
 new = {'#NAME':'Brian C. Sullivan', 
@@ -76,11 +77,11 @@ replace_string(file)
 
 # combines files while maintaining formatting
 ## Needs to be adjusted to use all files that were created. Start each resume on new page?
-doc1 = docx.Document(r'C:\Users\us59114\Desktop\Grant Thornton\Resume\Output Testing.docx')
-doc2 = docx.Document(r'C:\Users\us59114\Desktop\Grant Thornton\Resume\Output Testing2.docx')
+doc1 = docx.Document('Output Testing.docx')
+doc2 = docx.Document('Output Testing2.docx')
 for element in doc2.element.body:
     doc1 .element.body.append(element)
-doc1.save('new.docx')
+doc1.save('merge.docx')
 
 # --------------------------------------------------------------------------------------------------
 # --------------------------------- Duplicates tags for repetitive fields --------------------------
@@ -151,5 +152,5 @@ for x in range(0, len(testing)-1):
             cloned_run.text = doc.paragraphs[i].runs[count].text
             count = count +1
 
-doc.save(r'C:\Users\us59114\Desktop\Grant Thornton\Resume\Output Testing.docx')    
+doc.save('Output Testing.docx')    
     
