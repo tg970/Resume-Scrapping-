@@ -73,9 +73,106 @@ def createDictfromTxt(file):
             dict["priorExp"] = priorExp
             break
     
+    eduArr = []
+    eduArr = company
+    eduArr = file.readline().strip()
+    while True:
+        if eduArr == 'Years of Federal Experience':
+            break
+        elif eduArr == '':
+            eduArr = file.readline().strip().split(',')
+            continue
+        else:
+            if len(eduArr)<=1:
+                print("Here")
+                break
+            else:
+                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3],'minor':eduArr[4]}
+                dict["peducation"] = edu
+                break
+    
+    fYrs =  eduArr
+    fYrs = file.readline().strip()
+    while True:
+        fYrs = file.readline().strip()
+        if fYrs == 'Training and Certifications':
+            break
+        elif fYrs == '' or fYrs =='Years of Federal Experience':
+            fYrs = file.readline().strip()
+            continue
+        else:            
+            dict["#YEARSEXPERIENCE"] = fYrs
+            break
+        
+    train =  fYrs
+    train = file.readline().strip()
+    while True:
+        train = file.readline().strip()
+        if train == 'Language Skills':
+            break
+        elif train == '' or train =='Training and Certifications':
+            train = file.readline().strip()
+            continue
+        else:            
+            dict["#TRAININGS"] = train
+            break
+    
+    lang =  train
+    lang = file.readline().strip()
+    while True:
+        lang = file.readline().strip()
+        if lang == 'International Experience':
+            break
+        elif lang == '' or lang =='Language Skills':
+            lang = file.readline().strip()
+            continue
+        else:            
+            dict["#LANGUAGES"] = lang
+            break    
+        
+        
+    intern =  lang
+    intern = file.readline().strip()
+    while True:
+        intern = file.readline().strip()
+        if intern == 'Computer Skills':
+            break
+        elif intern == '' or intern =='International Experience':
+            intern = file.readline().strip()
+            continue
+        else:            
+            dict["#INTERNATIONAL"] = intern
+            break  
+        
+    compSkill =  intern
+    compSkill = file.readline().strip()
+    while True:
+        compSkill = file.readline().strip()
+        if compSkill == 'Software':
+            break
+        elif compSkill == '' or compSkill =='Computer Skills':
+            compSkill = file.readline().strip()
+            continue
+        else:            
+            dict["#COMPUTERSKILLS"] = compSkill
+            break  
+        
+    software =  compSkill
+    software = file.readline().strip()
+    while True:
+        software = file.readline().strip()
+        if software == 'Hardware':
+            break
+        elif software == '' or software =='Software':
+            software = file.readline().strip()
+            continue
+        else:            
+            dict["#SOFTWARE"] = software
+            break 
+        
+        
     # keep working
-    
-    
+        
     return dict
 
 def createProjectFromParagraph(str, gt=False):
@@ -93,5 +190,6 @@ if __name__ == "__main__":
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
     
     #print(infoDict["name"]["last"])
-    #hprint(infoDict)
-   
+    #print(infoDict)
+    exec(open("DocxTesting.py").read())
+    

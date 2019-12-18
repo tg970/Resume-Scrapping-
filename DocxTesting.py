@@ -8,7 +8,7 @@
 import docx
 
 # Identifying the file location of the template
-file = 'Target Resume Template4.docx'
+file = 'Target Resume Template3.docx'
 # Identifying an output file location
 fileout = 'Output Testing.docx'
                 
