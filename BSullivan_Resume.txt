@@ -1,0 +1,131 @@
+Brian C. Sullivan, 
+
+
+
+Mr. Sullivan is an Advisory Associate with Grant Thornton LLP’s Public Sector Practice in Arlington, VA and is aligned with the Advanced Digital Technology and Analytics service line within the practice. He holds a Bachelor of Business Administration (B.B.A.) degree in Economics with a concentration in Financial Economics from James Madison University. During his time as Business Analyst, he has gained experience in data analysis and visualization and supporting evaluations of financial management systems and processes. Through his education and work experience, Mr. Sullivan has developed skills in data visualization, data analytics, econometric modeling, program evaluation, and client services. He has experience with computer programs such as Microsoft PowerBI, Tableau, Qlik Sense, SAS, and the MS Office Suite, as well as open-source programming languages such as Python, R, SQL, VBA and HTML. 
+
+
+
+
+
+Grant Thornton LLP
+
+Advisory Associate, Global Public Sector (July 2018 - present).
+
+Department of Commerce, United States Patent and Trademark Office, Office of Policy and International Affairs (February 2019 – Present ) Mr. Sullivan is a member of the Tableau Visualization Support team within OPIA. This effort includes utilizing Tableau, a data visualization tool, to create various reports required both internally for OPIA and USPTO stakeholders at various leadership levels as well as for the external consumption by the public. Mr. Sullivan leads the requirements gathering, development and refresh processes of all reports and more than 12 dashboards from the data validation and staging process to the final deliverable. Mr. Sullivan also developed numerous VBA Macros and Python scripts to include ETL scripts, semi-automated reporting tools, and a PDF scraping tool in order to support dashboard refresh processes, data collection efforts and ad hoc reporting requests from OPIA stakeholders.
+
+State of Texas Department of Transportation (May 2019 – August 2019) Grant Thornton was contracted to develop a study in support of TxDOT on the ten-year Enterprise Information Management (EIM) Strategic Plan for all statewide systems and processes, including programs that address data governance, system architecture, advanced analytics, employee training, and effective communications. As part of this effort, Mr. Sullivan led the Quality Control process in support of over 350 project artifacts across more than 60 projects.
+
+Library of Congress, United States Copyright Office, Licensing Division (August 2018 – January 2019) Mr. Sullivan supported the Library of Congress United States Copyright Office (USCO) Accounting System Analysis of Alternatives engagement. The project provided an analysis based recommendation for alternatives to the legacy accounting and investment management systems. In this role Mr. Sullivan supported the client’s needs by conducting stakeholder interviews, conducting market research, developing process charts and evaluating alternatives. Mr. Sullivan also supported the creation of deliverables that support the continuing communication between the client and GT. The team was able to provide an initial list of COTS alternatives to the current process, and identify weaknesses in the current processes and systems. Mr. Sullivan assisted in the evaluations of cost and capability of potential solutions, which fed the recommendations.
+
+
+
+Merck Employees Federal Credit Union
+
+Member Services Intern (March 2017 – August 2017)
+
+Merck Employees Federal Credit Union (March 2017 – August 2017) Mr. Sullivan primarily served as a bank teller, handling banking transactions. Additional projects included improving reporting methods. Mr. Sullivan developed an automated data scrapping and reporting tool utilizing Excel VBA to drastically improve outdated ATM reporting methods making the process 18 times faster, while also minimizing human error. Mr. Sullivan was also a vital member of the Petya cyber-attack response and recovery team in June 2017. 
+
+ 
+
+AXA Financial
+
+Administrative Assistant (July 2016 – September 2016)
+
+AXA Financial (July 2016 – September 2016) Created an Excel VBA program to improve call sheet creation efficiency by 200%. Work spurred the innovation of a CRM platform used to manage contacts and increase efficiency. 
+
+
+
+Education 
+
+B.B.A., Economics, James Madison University, 2018, Minor / Concentration: Concentration in Financial Economics
+
+
+
+Years of Federal Experience
+
+>  1 Year
+
+
+
+Training and Certifications
+
+Microsoft Office Specialist Excel 2013
+
+Bloomberg Market Concepts
+
+
+
+Language Skills 
+
+English - Primary
+
+
+
+International Experience 
+
+(Include international employment, philanthropic involvement, as well as study abroad/educational experience)
+
+
+
+Computer Skills
+
+Tableau Desktop, Microsoft Power BI, Qlik Sense, Microsoft suite, SharePoint, VBA, Python, HTML, R, SAS
+
+
+
+Software
+
+N/A
+
+
+
+Hardware
+
+N/A
+
+		 
+
+Affiliations
+
+N/A
+
+
+
+Military Service
+
+N/A
+
+
+
+Awards
+
+Dean’s List (2014-2016)
+
+
+
+Research
+
+N/A
+
+
+
+Teaching
+
+N/A
+
+
+
+Publications
+
+N/A
+
+
+
+Security Clearance
+
+N/A
+
+
+
+3

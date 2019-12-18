@@ -1,12 +1,13 @@
 import docx2txt
 import json
+import os
 
 def createTxtFromDocx(file):
-	str = docx2txt.process(file + ".docx") # renders file readable
-	txt = open(file + ".txt", "w") # easier to scrape than a string
-	txt.write(str)
-	txt.close()
-	return
+    str = docx2txt.process(file + ".docx") # renders file readable
+    txt = open(file + ".txt", "w", encoding = 'utf-8') # easier to scrape than a string
+    txt.write(str)
+    txt.close()
+    return
 
 def createDictfromTxt(file):
     dict = {}
@@ -22,7 +23,7 @@ def createDictfromTxt(file):
     intro = file.readline().strip()
     while intro == "": # Skip through blank lines until the next field is reached
         intro = file.readline().strip()
-    dict["introduction"] = intro
+    dict["#INTRODUCTION"] = intro
     
     # Scraping GT experience   
     gtCompany = file.readline().strip()
@@ -78,17 +79,19 @@ def createDictfromTxt(file):
     return dict
 
 def createProjectFromParagraph(str, gt=False):
-    arr = str.replace(" (","|").replace(") ","|").split("|")
+    arr = str.replace(" (","|").replace(")","|").split("|")
     if gt:
-        return {"client":arr[0], "date":arr[1], "summary":arr[2]}
+        return {"#AGENCY":arr[0], "#PROJECTDATES":arr[1], "#EXPERIENCE":arr[2]}
     else:
         return {"name":arr[0], "date":arr[1], "summary":arr[2]}
     
 if __name__ == "__main__":
-    fileName = "Rohan Tomer - GT resume" # do not include extension
+    #fileName = "Rohan Tomer - GT resume" # do not include extension
+    fileName = "BSullivan_Resume"
     createTxtFromDocx(fileName)
-    txtFile = open(fileName + ".txt", "r") # opening for scraping
-    
+    txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
     
-    print(infoDict["name"]["last"])
+    #print(infoDict["name"]["last"])
+    #hprint(infoDict)
+   
