@@ -184,7 +184,7 @@ def createProjectFromParagraph(str, gt=False):
     
 if __name__ == "__main__":
     #fileName = "Rohan Tomer - GT resume" # do not include extension
-    fileName = "BSullivan_Resume"
+    fileName = 'sample_resumes/' + "BSullivan_Resume"
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
