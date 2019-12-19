@@ -1,12 +1,13 @@
 import docx2txt
 import json
+import os
 
 def createTxtFromDocx(file):
-	str = docx2txt.process(file + ".docx") # renders file readable
-	txt = open(file + ".txt", "w") # easier to scrape than a string
-	txt.write(str)
-	txt.close()
-	return
+    str = docx2txt.process(file + ".docx") # renders file readable
+    txt = open(file + ".txt", "w", encoding = 'utf-8') # easier to scrape than a string
+    txt.write(str)
+    txt.close()
+    return
 
 def createDictfromTxt(file):
     dict = {}
@@ -22,7 +23,7 @@ def createDictfromTxt(file):
     intro = file.readline().strip()
     while intro == "": # Skip through blank lines until the next field is reached
         intro = file.readline().strip()
-    dict["introduction"] = intro
+    dict["#INTRODUCTION"] = intro
     
     # Scraping GT experience   
     gtCompany = file.readline().strip()
@@ -72,23 +73,123 @@ def createDictfromTxt(file):
             dict["priorExp"] = priorExp
             break
     
+    eduArr = []
+    eduArr = company
+    eduArr = file.readline().strip()
+    while True:
+        if eduArr == 'Years of Federal Experience':
+            break
+        elif eduArr == '':
+            eduArr = file.readline().strip().split(',')
+            continue
+        else:
+            if len(eduArr)<=1:
+                print("Here")
+                break
+            else:
+                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3],'minor':eduArr[4]}
+                dict["peducation"] = edu
+                break
+    
+    fYrs =  eduArr
+    fYrs = file.readline().strip()
+    while True:
+        fYrs = file.readline().strip()
+        if fYrs == 'Training and Certifications':
+            break
+        elif fYrs == '' or fYrs =='Years of Federal Experience':
+            fYrs = file.readline().strip()
+            continue
+        else:            
+            dict["#YEARSEXPERIENCE"] = fYrs
+            break
+        
+    train =  fYrs
+    train = file.readline().strip()
+    while True:
+        train = file.readline().strip()
+        if train == 'Language Skills':
+            break
+        elif train == '' or train =='Training and Certifications':
+            train = file.readline().strip()
+            continue
+        else:            
+            dict["#TRAININGS"] = train
+            break
+    
+    lang =  train
+    lang = file.readline().strip()
+    while True:
+        lang = file.readline().strip()
+        if lang == 'International Experience':
+            break
+        elif lang == '' or lang =='Language Skills':
+            lang = file.readline().strip()
+            continue
+        else:            
+            dict["#LANGUAGES"] = lang
+            break    
+        
+        
+    intern =  lang
+    intern = file.readline().strip()
+    while True:
+        intern = file.readline().strip()
+        if intern == 'Computer Skills':
+            break
+        elif intern == '' or intern =='International Experience':
+            intern = file.readline().strip()
+            continue
+        else:            
+            dict["#INTERNATIONAL"] = intern
+            break  
+        
+    compSkill =  intern
+    compSkill = file.readline().strip()
+    while True:
+        compSkill = file.readline().strip()
+        if compSkill == 'Software':
+            break
+        elif compSkill == '' or compSkill =='Computer Skills':
+            compSkill = file.readline().strip()
+            continue
+        else:            
+            dict["#COMPUTERSKILLS"] = compSkill
+            break  
+        
+    software =  compSkill
+    software = file.readline().strip()
+    while True:
+        software = file.readline().strip()
+        if software == 'Hardware':
+            break
+        elif software == '' or software =='Software':
+            software = file.readline().strip()
+            continue
+        else:            
+            dict["#SOFTWARE"] = software
+            break 
+        
+        
     # keep working
-    
-    
+        
     return dict
 
 def createProjectFromParagraph(str, gt=False):
-    arr = str.replace(" (","|").replace(") ","|").split("|")
+    arr = str.replace(" (","|").replace(")","|").split("|")
     if gt:
-        return {"client":arr[0], "date":arr[1], "summary":arr[2]}
+        return {"#AGENCY":arr[0], "#PROJECTDATES":arr[1], "#EXPERIENCE":arr[2]}
     else:
         return {"name":arr[0], "date":arr[1], "summary":arr[2]}
     
 if __name__ == "__main__":
-    fileName = "Rohan Tomer - GT resume" # do not include extension
+    #fileName = "Rohan Tomer - GT resume" # do not include extension
+    fileName = "BSullivan_Resume"
     createTxtFromDocx(fileName)
-    txtFile = open(fileName + ".txt", "r") # opening for scraping
-    
+    txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
     
-    print(infoDict["name"]["last"])
+    #print(infoDict["name"]["last"])
+    #print(infoDict)
+    exec(open("DocxTesting.py").read())
+    
