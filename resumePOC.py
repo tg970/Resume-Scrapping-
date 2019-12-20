@@ -63,7 +63,8 @@ def createDictfromTxt(file):
             if line == "":
                 continue
             elif line.find("(") < 0: # The file has moved on to another former job
-                priorExp.append({"company":company, "title":title, "date": date, "projects":projects})
+                priorExp.append({"company":company, "title":title, "date": date, 
+                                 "projects":projects})
                 company = line
                 break
             else:
@@ -87,10 +88,71 @@ def createDictfromTxt(file):
                 print("Here")
                 break
             else:
-                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3],'minor':eduArr[4]}
+                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3],
+                        'minor':eduArr[4]}
                 dict["peducation"] = edu
                 break
     
+    # List of the remaining feild headers in the source template
+    fieldList = ['Years of Federal Experience','Training and Certifications','Language Skills',
+                 'International Experience','Computer Skills','Software','Hardware','Affiliations',
+                 'Military Service','Awards','Research','Teaching','Publications',
+                 'Security Clearance','']
+    # Keys for the corresponding headers
+    keyList = ['#YEARSEXPERIENCE','#CERTIFICATIONS','#LANGUAGES','#INTERNATIONAL','#COMPUTERSKILLS',
+               '#SOFTWARE','#HARDWARE','#AFFILIATIONS','#MILSERV','#AWARDS','#RESEARCH','#TEACHING',
+               '#PUBLICATIONS','#SECURITYCLEARANCE']
+     
+    # Scrapes everything after education
+    # set operating line
+    line = eduArr
+    #Loop through the fields in the list
+    for x in range(0,len(fieldList)-1):
+        #Get the key from the key list and read the next line
+        key = keyList[x]
+        line = file.readline().strip()
+        while True:
+            # read the next line
+            line = file.readline().strip()
+            # stop if you've hit the next field name
+            if line == fieldList[x+1]:
+                    break
+            # otherwise if the line is blank, or the feild name were looking for, read the next line
+            elif line == '' or line == fieldList[x]:
+                line = file.readline().strip()
+                continue
+            #Storing the correct line with the appropriate key
+            else:         
+                dict[key] = line.strip()
+                break 
+           
+    return dict
+
+def createProjectFromParagraph(str, gt=False):
+    arr=[]
+    arr.append(str.split('–')[0].rsplit('(',1)[0].strip())
+    arr.append(str.split('–')[0].rsplit('(',1)[1].strip() + ' – ' + str.split('–')[1].split(')')[0].strip())
+    arr.append(str.split('–')[1].split(')',1)[1].strip())
+    #arr = str.replace(" (","|").replace(")","|").split("|")
+    if gt:
+        return {"#AGENCY":arr[0], "#PROJECTDATES":'(' + arr[1] + ')', "#EXPERIENCE":arr[2]}
+    else:
+        return {"name":arr[0], "date":arr[1], "summary":arr[2]}
+    
+if __name__ == "__main__":
+    #fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
+    fileName = 'sample_resumes/' + "BSullivan_Resume"
+    createTxtFromDocx(fileName)
+    txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
+    infoDict = createDictfromTxt(txtFile) # This is the key value data structure
+    
+    #print(infoDict["gtExp"]["engagements"][0])
+    #print(infoDict)
+    exec(open("DocxTesting.py").read())
+    
+  
+# ------------------------------------------ Graveyard ---------------------------------------------
+    '''
     fYrs =  eduArr
     fYrs = file.readline().strip()
     while True:
@@ -169,27 +231,5 @@ def createDictfromTxt(file):
         else:            
             dict["#SOFTWARE"] = software
             break 
-        
-        
-    # keep working
-        
-    return dict
-
-def createProjectFromParagraph(str, gt=False):
-    arr = str.replace(" (","|").replace(")","|").split("|")
-    if gt:
-        return {"#AGENCY":arr[0], "#PROJECTDATES":arr[1], "#EXPERIENCE":arr[2]}
-    else:
-        return {"name":arr[0], "date":arr[1], "summary":arr[2]}
-    
-if __name__ == "__main__":
-    #fileName = "Rohan Tomer - GT resume" # do not include extension
-    fileName = 'sample_resumes/' + "BSullivan_Resume"
-    createTxtFromDocx(fileName)
-    txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
-    infoDict = createDictfromTxt(txtFile) # This is the key value data structure
-    
-    #print(infoDict["name"]["last"])
-    #print(infoDict)
-    exec(open("DocxTesting.py").read())
+        '''
     
