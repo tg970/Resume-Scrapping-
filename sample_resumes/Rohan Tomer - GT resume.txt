@@ -1,0 +1,81 @@
+Rohan Tomer
+
+
+
+Mr. Tomer has one year of professional experience in statistical analytics and data sciences. He has a broad knowledge of software development, programming, and information technology. His pre-GT experience includes iOS development, Agile/Scrum methodologies, software testing and documentation, and solution life-cycle development. At GT, he has gained experience in data management and visualization, as well as analysis of federal processes and workflow.
+
+
+
+
+
+Grant Thornton LLP
+
+Associate, Global Public Sector (June 2019 – present)
+
+Department of Defense – U.S. Army, Office of the Chief of Chaplains, Recruiting and Endorser Relations. (June 2019 – present) Automated clean-up process for Chaplain Board data to discover trends in Chaplain enlistment competency and propensity. Formulated a social media recruiting strategy for the Army Chaplains based on extensive research, coupled with a data collection and management strategy. In addition, Mr. Tomer wrote several interview protocols to guide landscaping efforts of creating optimal chaplain profiles and determining recruiting strategy.
+
+
+
+Atos Worldline
+
+iOS Development Intern (February 2018 – August 2018)
+
+DocID iOS Solution Intern. (February 2018 – August 2018) Developed DocID, a document identification API/SDK, for the iOS platform, in Objective-C using Apple’s XCode software. Followed good object-oriented programming principles, along with internal documentation and system logging, to create an easy-to-engineer SDK (software development kit). Wrote extensive and detailed client documentation for API (application programming interface) use and installation in both English and French. Mr. Tomer also automated the build, test, and deployment process for DocID iOS with GitLab’s Continuous Integration. He mastered complex communication and teamwork skills by having daily meetings with team members completely in French, through applying the Scrum, Agile development paradigm, delivering functionality-centric updates in a series of two-week Sprints.
+
+
+
+
+
+ Education 
+
+B.S., Computational & Applied Mathematics & Statistics, and
+
+B.A., French & Francophone Studies
+
+The College of William and Mary (August 2015 – May 2019)
+
+
+
+Years of Federal Experience
+
+0.25 Years
+
+ 
+
+Language Skills
+
+English – Full Professional Knowledge
+
+French – Full Professional Knowledge
+
+Hindi – Fluency
+
+
+
+International Experience
+
+Interned in Bezons, France with Atos Worldline (February – August 2018)
+
+Studied in Paris, France for the Institute of Field Education (January – May 2018)
+
+
+
+Computer Skills		
+
+Data Structures, Software Development, Algorithms, Discrete-Event Simulation, Probability & Mathematical Statistics, Statistical Experiment Design, Linear Algebra and Matrix Programming, Numerical Analysis, Cross-Section and Time-Series Econometrics
+
+
+
+Software (in descending order of proficiency)
+
+Python, Java, R, C, Objective-C, C++, Swift, Stata, MatLAB, JavaScript, HTML/CSS, XML, Minitab, Microsoft Office, C#, JMP, SQL, FORTRAN
+
+
+
+Awards
+
+Phi Beta Kappa Inductee (May 2019)
+
+Dean’s List, William and Mary (Fall 2015, 2016, 2017, 2018, & Spring 2016, 2017, 2018, 2019)
+
+1

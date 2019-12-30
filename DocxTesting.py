@@ -8,13 +8,14 @@
 import docx
 
 # Identifying the file location of the template
-file = 'Target Resume Template3.docx'
+file = 'target_resumes/' + 'Target Resume Template2.docx'
 # Identifying an output file location
-fileout = 'Output Testing.docx'
+fileout = 'output_resumes/' + 'Output Testing.docx'
                 
 new = infoDict
 new['#NAME'] = infoDict['name']['first'] + " " + infoDict['name']['last']
 new['#LASTNAME'] = infoDict['name']['last']
+new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducation']['field'] + ',' + infoDict['peducation']['college'] + ',' + infoDict['peducation']['year']
 
 #converts the output list into a dictionary to work with the below
 testing = {}
