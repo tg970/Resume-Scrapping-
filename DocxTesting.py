@@ -13,7 +13,8 @@ file = 'target_resumes/' + 'Target Resume Template2.docx'
 fileout = 'output_resumes/' + 'Output Testing.docx'
                 
 new = infoDict
-new['#NAME'] = infoDict['name']['first'] + " " + infoDict['name']['last']
+new['#NAME'] = infoDict['name']['first'] + " " + infoDict['name']['middle']\
+    + " " + infoDict['name']['last']
 new['#LASTNAME'] = infoDict['name']['last']
 new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducation']['field'] + ',' + infoDict['peducation']['college'] + ',' + infoDict['peducation']['year']
 
@@ -56,6 +57,7 @@ def clone_run_props(tmpl_run, this_run):
     this_run.font.name = tmpl_run.font.name
     this_run.font.size = tmpl_run.font.size
     this_run.font.color.rgb = tmpl_run.font.color.rgb
+    
 
 # only creates new paragraphs at bottom of document
 # For each experience in the dictionary
@@ -68,6 +70,7 @@ for x in range(0, len(testing)-1):
         template_paragraph = doc.paragraphs[i]
         # add a new paragraph
         new_paragraph = doc.add_paragraph()
+        #new_paragraph.paragraph_format = template_paragraph.paragraph_format
         count =0
         # for each run in the copy paragraph
         for run in template_paragraph.runs:
