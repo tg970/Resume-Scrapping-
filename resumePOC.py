@@ -29,9 +29,9 @@ def createDictfromTxt(file):
         
     nameArr = nameArr[0].split()
     if len(nameArr) == 3:
-        nameDict = {"first":nameArr[0], "middle":nameArr[1], "last":nameArr[-1], "title":title}
+        nameDict = {"first":nameArr[0], "middle":nameArr[1]+ " ", "last":nameArr[-1], "title":title}
     else:
-        nameDict = {"first":nameArr[0], "middle":None, "last":nameArr[-1], "title":title}
+        nameDict = {"first":nameArr[0], "middle":'', "last":nameArr[-1], "title":title}
     dict["name"] = nameDict
     
     # Scraping introduction
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     
     #print(infoDict["gtExp"]["engagements"][0])
     #print(infoDict)
-    #exec(open("DocxTesting.py").read())
+    exec(open("DocxTesting.py").read())
       
 # ------------------------------------------ Graveyard ---------------------------------------------
     '''
