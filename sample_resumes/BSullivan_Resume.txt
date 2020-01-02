@@ -1,8 +1,16 @@
-Brian C. Sullivan, 
+Brian C. Sullivan 
 
 
+
+Introductory paragraph
 
 Mr. Sullivan is an Advisory Associate with Grant Thornton LLP’s Public Sector Practice in Arlington, VA and is aligned with the Advanced Digital Technology and Analytics service line within the practice. He holds a Bachelor of Business Administration (B.B.A.) degree in Economics with a concentration in Financial Economics from James Madison University. During his time as Business Analyst, he has gained experience in data analysis and visualization and supporting evaluations of financial management systems and processes. Through his education and work experience, Mr. Sullivan has developed skills in data visualization, data analytics, econometric modeling, program evaluation, and client services. He has experience with computer programs such as Microsoft PowerBI, Tableau, Qlik Sense, SAS, and the MS Office Suite, as well as open-source programming languages such as Python, R, SQL, VBA and HTML. 
+
+
+
+Summary of Qualifications
+
+Experienced data analytics professional with demonstrated ability developing Key Performance Indicators (KPI), data mining, data preparation, and data visualization.
 
 
 
@@ -51,6 +59,8 @@ Years of Federal Experience
 Training and Certifications
 
 Microsoft Office Specialist Excel 2013
+
+
 
 Language Skills 
 
@@ -124,4 +134,4 @@ N/A
 
 
 
-2
+3

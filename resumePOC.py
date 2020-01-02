@@ -12,25 +12,63 @@ def createTxtFromDocx(file):
 def createDictfromTxt(file):
     dict = {}
     
+    '''
     # Scraping name
     nameArr = file.readline().strip().split()
     nameDict = {"first":nameArr[0], "last":nameArr[1], "title":None}
     if len(nameArr) > 2:
         nameDict["title"] = nameArr[2]
     dict["name"] = nameDict
+    '''
+    
+    nameArr = file.readline().strip().split(',')
+    if len(nameArr) ==2:
+        title = nameArr[1]
+    else:
+        title = None
+        
+    nameArr = nameArr[0].split()
+    if len(nameArr) == 3:
+        nameDict = {"first":nameArr[0], "middle":nameArr[1], "last":nameArr[-1], "title":title}
+    else:
+        nameDict = {"first":nameArr[0], "middle":None, "last":nameArr[-1], "title":title}
+    dict["name"] = nameDict
     
     # Scraping introduction
     intro = file.readline().strip()
     while intro == "": # Skip through blank lines until the next field is reached
         intro = file.readline().strip()
+        if intro == "Introductory paragraph":
+            intro = file.readline().strip()
     dict["#INTRODUCTION"] = intro
-    
+      
+    count =0
+    summary = file.readline().strip()
+    while summary == "":
+        summary = file.readline().strip()
+    dict["#SUMMARY"] = ""
+    if summary == "Summary of Qualifications":
+        summary = file.readline().strip()
+    if summary =="":
+        summary= file.readline().strip()
+    while summary != "":
+        count =+1
+        if count == 1:
+            dict["#SUMMARY"] = summary
+        else:
+            dict["#SUMMARY"] = dict["#SUMMARY"] + ", " + summary
+        summary = file.readline().strip()
+        
     # Scraping GT experience   
     gtCompany = file.readline().strip()
     while gtCompany == "":
         gtCompany = file.readline().strip()
     
     gtTitleDate = file.readline().strip()
+    
+    if gtTitleDate == "Grant Thornton LLP" or gtTitleDate == "":
+        gtTitleDate = file.readline().strip()
+    
     while gtTitleDate == "":
         gtTitleDate = file.readline().strip()
     [gtTitle, gtDate] = gtTitleDate[:-1].split(" (")
@@ -97,7 +135,7 @@ def createDictfromTxt(file):
     fieldList = ['Years of Federal Experience','Training and Certifications','Language Skills',
                  'International Experience','Computer Skills','Software','Hardware','Affiliations',
                  'Military Service','Awards','Research','Teaching','Publications',
-                 'Security Clearance','']
+                 'Security Clearance','STOP']
     # Keys for the corresponding headers
     keyList = ['#YEARSEXPERIENCE','#CERTIFICATIONS','#LANGUAGES','#INTERNATIONAL','#COMPUTERSKILLS',
                '#SOFTWARE','#HARDWARE','#AFFILIATIONS','#MILSERV','#AWARDS','#RESEARCH','#TEACHING',
@@ -110,6 +148,7 @@ def createDictfromTxt(file):
     for x in range(0,len(fieldList)-1):
         #Get the key from the key list and read the next line
         key = keyList[x]
+        dict[key] = ''
         line = file.readline().strip()
         while True:
             # read the next line
@@ -125,14 +164,15 @@ def createDictfromTxt(file):
             else:         
                 dict[key] = line.strip()
                 break 
+                
            
     return dict
 
 def createProjectFromParagraph(str, gt=False):
     arr=[]
-    arr.append(str.split('–')[0].rsplit('(',1)[0].strip())
-    arr.append(str.split('–')[0].rsplit('(',1)[1].strip() + ' – ' + str.split('–')[1].split(')')[0].strip())
-    arr.append(str.split('–')[1].split(')',1)[1].strip())
+    arr.append(str.split(' – ')[0].rsplit('(',1)[0].strip())
+    arr.append(str.split(' – ')[0].rsplit('(',1)[1].strip() + ' – ' + str.split(' – ')[1].split(')')[0].strip())
+    arr.append(str.split(' – ')[1].split(')',1)[1].strip())
     #arr = str.replace(" (","|").replace(")","|").split("|")
     if gt:
         return {"#AGENCY":arr[0], "#PROJECTDATES":'(' + arr[1] + ')', "#EXPERIENCE":arr[2]}
@@ -142,15 +182,15 @@ def createProjectFromParagraph(str, gt=False):
 if __name__ == "__main__":
     #fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
     fileName = 'sample_resumes/' + "BSullivan_Resume"
+    #fileName = 'sample_resumes/' + "Example_Resume"
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
     
     #print(infoDict["gtExp"]["engagements"][0])
     #print(infoDict)
-    exec(open("DocxTesting.py").read())
-    
-  
+    #exec(open("DocxTesting.py").read())
+      
 # ------------------------------------------ Graveyard ---------------------------------------------
     '''
     fYrs =  eduArr
