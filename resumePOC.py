@@ -93,7 +93,14 @@ def createDictfromTxt(file):
         titleDate = file.readline().strip()
         while titleDate == "":
             titleDate = file.readline().strip()
-        [title, date] = titleDate[:-1].split(" (")
+        while True: # added break for GT client without engagement dates
+            try:
+                [title, date] = titleDate[:-1].split(" (")
+                break
+            except:
+                print('Engagement dates missing in ' + company)
+                date = 'N/A'
+                break
         
         projects = []
         for line in file:
@@ -181,7 +188,8 @@ def createProjectFromParagraph(str, gt=False):
     
 if __name__ == "__main__":
     #fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
-    fileName = 'sample_resumes/' + "BSullivan_Resume"
+    #fileName = 'sample_resumes/' + "BSullivan_Resume"
+    fileName = 'sample_resumes/' + "Nicholas Loughran Resume and Bio"
     #fileName = 'sample_resumes/' + "Example_Resume"
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
