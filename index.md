@@ -1,9 +1,3 @@
----
-noteId: "44f991a02dad11eabedc19b88a3453d1"
-tags: []
-
----
-
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/vayyagari27/Resume-Scrapping-/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
