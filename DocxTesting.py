@@ -6,19 +6,24 @@
 # --------------------------------------------------------------------------------------------------
 
 import docx
+import json
 
 # Identifying the file location of the template
 file = 'target_resumes/' + 'Target Resume Template2.docx'
 # Identifying an output file location
 fileout = 'output_resumes/' + 'Output Testing.docx'
-                
+
+# Import InfoDict json file to add to target resume template
+with open('infoDict.txt') as json_file:
+    infoDict = json.load(json_file)
+
 new = infoDict
 new['#NAME'] = infoDict['name']['first'] + " " + infoDict['name']['middle']\
     + " " + infoDict['name']['last']
 new['#LASTNAME'] = infoDict['name']['last']
 new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducation']['field'] + ',' + infoDict['peducation']['college'] + ',' + infoDict['peducation']['year']
 
-#converts the output list into a dictionary to work with the below
+# converts the output list into a dictionary to work with the below
 testing = {}
 for x in range(len(infoDict['gtExp']['engagements'])): 
     key = 'EXPERIENCE' + str(x)
