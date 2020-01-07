@@ -93,7 +93,14 @@ def createDictfromTxt(file):
         titleDate = file.readline().strip()
         while titleDate == "":
             titleDate = file.readline().strip()
-        [title, date] = titleDate[:-1].split(" (")
+        while True: # added break for GT client without engagement dates
+            try:
+                [title, date] = titleDate[:-1].split(" (")
+                break
+            except:
+                print('Engagement dates missing in ' + company)
+                date = 'N/A'
+                break
         
         projects = []
         for line in file:
@@ -180,17 +187,23 @@ def createProjectFromParagraph(str, gt=False):
         return {"name":arr[0], "date":arr[1], "summary":arr[2]}
     
 if __name__ == "__main__":
-    #fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
+    ### Select the file to scrape
+    # fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
     fileName = 'sample_resumes/' + "BSullivan_Resume"
+    # fileName = 'sample_resumes/' + "Nicholas Loughran Resume and Bio"
     #fileName = 'sample_resumes/' + "Example_Resume"
+
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
     
-    #print(infoDict["gtExp"]["engagements"][0])
-    #print(infoDict)
+    # print(infoDict["gtExp"]["engagements"][0])
+    # print(infoDict)
     #exec(open("DocxTesting.py").read())
-      
+
+    # Exports infoDict as json that DocxTest.py uses
+    with open('infoDict.txt', 'w') as outfile:
+        json.dump(infoDict, outfile)
 
 # ------------------------------------------ Graveyard ---------------------------------------------
     '''
