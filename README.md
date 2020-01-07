@@ -21,5 +21,9 @@ docx2txt
 pip install docx2txt
 ```
 
+json
+```markdown
+pip install json
+```
 ## Resources
 Link to [useful Github commands.](https://www.educative.io/edpresso/what-are-some-important-git-commands)
