@@ -2,6 +2,15 @@ import docx2txt
 import json
 import os
 
+### User Input ---------------------------------- ###
+# Select resume to scrape (no extension)
+# resume_name = "Rohan Tomer - GT resume"
+resume_name = "BSullivan_Resume"
+# resume_name = "Nicholas Loughran Resume"
+# resume_name = "Example_Resume"
+
+
+# Renders file readable and in utf-8 format
 def createTxtFromDocx(file):
     str = docx2txt.process(file + ".docx") # renders file readable
     txt = open(file + ".txt", "w", encoding = 'utf-8') # easier to scrape than a string
@@ -9,6 +18,7 @@ def createTxtFromDocx(file):
     txt.close()
     return
 
+# Scrapes readable resume file
 def createDictfromTxt(file):
     dict = {}
 
@@ -133,12 +143,11 @@ def createDictfromTxt(file):
                 print("Here")
                 break
             else:
-                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3],
-                        'minor':eduArr[4]}
+                edu =  {"degree":eduArr[0], "field":eduArr[1], "college":eduArr[2],'year':eduArr[3], 'minor':eduArr[4]}
                 dict["peducation"] = edu
                 break
 
-    # List of the remaining feild headers in the source template
+    # List of the remaining field headers in the source template
     fieldList = ['Years of Federal Experience','Training and Certifications','Language Skills',
                  'International Experience','Computer Skills','Software','Hardware','Affiliations',
                  'Military Service','Awards','Research','Teaching','Publications',
@@ -175,6 +184,7 @@ def createDictfromTxt(file):
 
     return dict
 
+# Formats project dates
 def createProjectFromParagraph(str, gt=False):
     arr=[]
     arr.append(str.split(' – ')[0].rsplit('(',1)[0].strip())
@@ -186,12 +196,15 @@ def createProjectFromParagraph(str, gt=False):
     else:
         return {"name":arr[0], "date":arr[1], "summary":arr[2]}
 
+# Creates json dictionary
 if __name__ == "__main__":
     ### Select the file to scrape
-    # fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
-    fileName = 'sample_resumes/' + "BSullivan_Resume"
-    # fileName = 'sample_resumes/' + "Nicholas Loughran Resume and Bio"
-    #fileName = 'sample_resumes/' + "Example_Resume"
+    # fileName = 'sample_resumes/' + "Rohan Tomer - GT resume" # do not include extension
+    # fileName = 'sample_resumes/' + "BSullivan_Resume"
+    # fileName = 'sample_resumes/' + "Nicholas Loughran Resume"
+    # fileName = 'sample_resumes/' + "Example_Resume"
+
+    fileName = 'sample_resumes/' + resume_name
 
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
@@ -204,6 +217,7 @@ if __name__ == "__main__":
     # Exports infoDict as json that DocxTest.py uses
     with open('output_resumes/infoDict.txt', 'w') as outfile:
         json.dump(infoDict, outfile)
+        print('created infodict')
 
 # ------------------------------------------ Graveyard ---------------------------------------------
     '''
