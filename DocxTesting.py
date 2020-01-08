@@ -8,20 +8,27 @@
 import docx
 import json
 
+### User Input ------------------------------------------------------ ###
 # Identifying the file location of the template
-file = 'target_resumes/' + 'Target Resume Template2.docx'
-# Identifying an output file location
-fileout = 'output_resumes/' + 'Output Testing.docx'
+file_target_name = 'Target Resume Template2.docx'  # with extension
+file = 'target_resumes/' + file_target_name
 
+# Identifying an output file location (moved for demo)
+# fileout = 'output_resumes/' + 'Output Testing.docx'
+
+### Target Resume Completeion -------------------------------- ###
 # Import InfoDict json file to add to target resume template
 with open('output_resumes/infoDict.txt') as json_file:
     infoDict = json.load(json_file)
 
 new = infoDict
+
 new['#NAME'] = infoDict['name']['first'] + " " + infoDict['name']['middle']\
     + " " + infoDict['name']['last']
 new['#LASTNAME'] = infoDict['name']['last']
-new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducation']['field'] + ',' + infoDict['peducation']['college'] + ',' + infoDict['peducation']['year']
+new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducation']['field'] + \
+    ',' + infoDict['peducation']['college'] + \
+    ',' + infoDict['peducation']['year']
 
 # converts the output list into a dictionary to work with the below
 testing = {}
@@ -29,25 +36,35 @@ for x in range(len(infoDict['gtExp']['engagements'])):
     key = 'EXPERIENCE' + str(x)
     testing[key] = infoDict['gtExp']['engagements'][x]
 
+# Identifying an output file location (for demo)
+fileout = 'output_resumes/' + \
+    infoDict['name']['first'] + ' ' + \
+    infoDict['name']['last'] + ' ' + file_target_name + '.docx'
+
 # --------------------------------------------------------------------------------------------------
 # --------------------------------- Duplicates tags for repetitive fields --------------------------
 # --------------------------------------------------------------------------------------------------
-# Does not work with tables yet
-doc = docx.Document(file)
+
+# Read in Target resume template
+doc = docx.Document(file)  # Does not work with tables yet
 
 # returns the numbers for paragraphs that contain an experience related field
+
+
 def getParaNumbers(file):
     para = []
     # Loop through fields in dictionary
     for field in testing['EXPERIENCE0']:
         count = -1
-        #Loop through paragraphs in document
+        # Loop through paragraphs in document
         for p in doc.paragraphs:
             count = count + 1
             # If field is in paragraph, loop through the runs
             if field in p.text:
                 para.append(count)
     return para
+
+
 para = getParaNumbers(file)
 
 # removing duplicates
@@ -55,6 +72,8 @@ para = list(dict.fromkeys(para))
 para.sort()
 
 # Gets formatting properties of template runs - will need to add more
+
+
 def clone_run_props(tmpl_run, this_run):
     this_run.bold = tmpl_run.bold
     this_run.italic = tmpl_run.italic
@@ -76,7 +95,7 @@ for x in range(0, len(testing)-1):
         # add a new paragraph
         new_paragraph = doc.add_paragraph()
         #new_paragraph.paragraph_format = template_paragraph.paragraph_format
-        count =0
+        count = 0
         # for each run in the copy paragraph
         for run in template_paragraph.runs:
             # add a new run in the new paragaph
@@ -85,26 +104,28 @@ for x in range(0, len(testing)-1):
             clone_run_props(run, cloned_run)
             # assigns the text of the run
             cloned_run.text = doc.paragraphs[i].runs[count].text
-            count = count +1
+            count = count + 1
 
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------- replace tags ---------------------------------------------
 # --------------------------------------------------------------------------------------------------
 
 # Replace strings for non repetitive fields
+
+
 def replace_string(file):
     # Open file
     #doc = docx.Document(file)
     # Loop through fields in dictionary
     for field in new:
         if field != 'gtExp':
-            #Loop through paragraphs in document
+            # Loop through paragraphs in document
             for p in doc.paragraphs:
                 # If field is in paragraph, loop through the runs
                 if field in p.text:
                     inline = p.runs
                     for i in range(len(inline)):
-                        #Replace the key with the desired text
+                        # Replace the key with the desired text
                         if field in inline[i].text:
                             text = inline[i].text.replace(field, new[field])
                             inline[i].text = text
@@ -122,47 +143,51 @@ def replace_string(file):
                                 for i in range(len(inline)):
                                     # Replace the key with the desired text
                                     if field in inline[i].text:
-                                        text = inline[i].text.replace(field, new[field])
+                                        text = inline[i].text.replace(
+                                            field, new[field])
                                         inline[i].text = text
 
     # Replace the now duplicated tags with the appropriate values
-    #Loop through keys in dictionary
+    # Loop through keys in dictionary
     for key in testing:
-        #Loop through values in each key
+        # Loop through values in each key
         for field in testing[key]:
-                #Loop through paragraphs in document
-                for p in doc.paragraphs:
+                # Loop through paragraphs in document
+            for p in doc.paragraphs:
                         # If field is in paragraph, loop through the runs
-                        if field in p.text:
-                            inline = p.runs
-                            for i in range(len(inline)):
-                                #Replace the key with the desired text
-                                if field in inline[i].text:
-                                    text = inline[i].text.replace(field, testing[key][field])
-                                    inline[i].text = text
-                                    break
+                if field in p.text:
+                    inline = p.runs
+                    for i in range(len(inline)):
+                                # Replace the key with the desired text
+                        if field in inline[i].text:
+                            text = inline[i].text.replace(
+                                field, testing[key][field])
+                            inline[i].text = text
                             break
-                 # Loop through the tables in the document
-                for table in doc.tables:
+                    break
+         # Loop through the tables in the document
+            for table in doc.tables:
                     # Loop through the rows in the table
-                    for row in table.rows:
-                        # Loop through the cells in the row
-                        for cell in row.cells:
-                            # Loop through the paragraphs in the cell
-                            for p in cell.paragraphs:
-                                # If feild is in paragraph, loop through the runs
-                                if field in p.text:
-                                    inline = p.runs
-                                    for i in range(len(inline)):
+                for row in table.rows:
+                    # Loop through the cells in the row
+                    for cell in row.cells:
+                        # Loop through the paragraphs in the cell
+                        for p in cell.paragraphs:
+                            # If feild is in paragraph, loop through the runs
+                            if field in p.text:
+                                inline = p.runs
+                                for i in range(len(inline)):
                                         # Replace the key with the desired text
-                                        if field in inline[i].text:
-                                            text = inline[i].text.replace(field, testing[key][field])
-                                            inline[i].text = text
-                                            break
+                                    if field in inline[i].text:
+                                        text = inline[i].text.replace(
+                                            field, testing[key][field])
+                                        inline[i].text = text
+                                        break
 
     # Save to fileout
     doc.save(fileout)
     return
+
 
 replace_string(file)
 
