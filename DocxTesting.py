@@ -14,7 +14,7 @@ file = 'target_resumes/' + 'Target Resume Template2.docx'
 fileout = 'output_resumes/' + 'Output Testing.docx'
 
 # Import InfoDict json file to add to target resume template
-with open('infoDict.txt') as json_file:
+with open('output_resumes/infoDict.txt') as json_file:
     infoDict = json.load(json_file)
 
 new = infoDict
@@ -25,10 +25,10 @@ new['#EDUCATION'] = infoDict['peducation']['degree'] + ',' + infoDict['peducatio
 
 # converts the output list into a dictionary to work with the below
 testing = {}
-for x in range(len(infoDict['gtExp']['engagements'])): 
+for x in range(len(infoDict['gtExp']['engagements'])):
     key = 'EXPERIENCE' + str(x)
     testing[key] = infoDict['gtExp']['engagements'][x]
-              
+
 # --------------------------------------------------------------------------------------------------
 # --------------------------------- Duplicates tags for repetitive fields --------------------------
 # --------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ def clone_run_props(tmpl_run, this_run):
     this_run.font.name = tmpl_run.font.name
     this_run.font.size = tmpl_run.font.size
     this_run.font.color.rgb = tmpl_run.font.color.rgb
-    
+
 
 # only creates new paragraphs at bottom of document
 # For each experience in the dictionary
@@ -86,11 +86,11 @@ for x in range(0, len(testing)-1):
             # assigns the text of the run
             cloned_run.text = doc.paragraphs[i].runs[count].text
             count = count +1
-            
+
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------- replace tags ---------------------------------------------
 # --------------------------------------------------------------------------------------------------
-            
+
 # Replace strings for non repetitive fields
 def replace_string(file):
     # Open file
@@ -107,7 +107,7 @@ def replace_string(file):
                         #Replace the key with the desired text
                         if field in inline[i].text:
                             text = inline[i].text.replace(field, new[field])
-                            inline[i].text = text 
+                            inline[i].text = text
             # Loop through the tables in the document
             for table in doc.tables:
                 # Loop through the rows in the table
@@ -123,9 +123,9 @@ def replace_string(file):
                                     # Replace the key with the desired text
                                     if field in inline[i].text:
                                         text = inline[i].text.replace(field, new[field])
-                                        inline[i].text = text 
-                                        
-    # Replace the now duplicated tags with the appropriate values         
+                                        inline[i].text = text
+
+    # Replace the now duplicated tags with the appropriate values
     #Loop through keys in dictionary
     for key in testing:
         #Loop through values in each key
@@ -139,7 +139,7 @@ def replace_string(file):
                                 #Replace the key with the desired text
                                 if field in inline[i].text:
                                     text = inline[i].text.replace(field, testing[key][field])
-                                    inline[i].text = text 
+                                    inline[i].text = text
                                     break
                             break
                  # Loop through the tables in the document
@@ -157,12 +157,12 @@ def replace_string(file):
                                         # Replace the key with the desired text
                                         if field in inline[i].text:
                                             text = inline[i].text.replace(field, testing[key][field])
-                                            inline[i].text = text 
+                                            inline[i].text = text
                                             break
-                                        
+
     # Save to fileout
     doc.save(fileout)
-    return 
+    return
 
 replace_string(file)
 
@@ -187,7 +187,7 @@ doc1.save('merge.docx')
 
 '''
 # Example of data.. would be replaced by the output from the scraping
-new = {'#NAME':'Brian C. Sullivan', 
+new = {'#NAME':'Brian C. Sullivan',
        '#EDUCATION':'B.B.A., Economics, James Madison University, 2018, Minor / Concentration: Concentration in Financial Economics',
        '#TRAININGS':'Microsoft Office Specialist Excel 2013, Bloomberg Market Concept',
        '#CLEARANCE':'',
@@ -201,7 +201,7 @@ new = {'#NAME':'Brian C. Sullivan',
        '#CERTIFICATIONS':'',
        '#LASTNAME':'Sullivan',
        '#TITLE':''}
-       
+
 testing = {'EXPERIENCE1':{
                '#AGENCY':'Department of Commerce, United States Patent and Trademark Office (USPTO), Office of Policy and International Affairs (OPIA)',
                '#PROJECTDATES': '(February 2019 – Present)',
@@ -215,4 +215,4 @@ testing = {'EXPERIENCE1':{
                '#PROJECTDATES':'(August 2018 – January 2019)',
                '#EXPERIENCE': 'Mr. Sullivan supported the Library of Congress United States Copyright Office (USCO) Accounting System Analysis of Alternatives engagement. The project provided an analysis based recommendation for alternatives to the legacy accounting and investment management systems. In this role Mr. Sullivan supported the client’s needs by conducting stakeholder interviews, conducting market research, developing process charts and evaluating alternatives. Mr. Sullivan also supported the creation of deliverables that support the continuing communication between the client and GT. The team was able to provide an initial list of COTS alternatives to the current process, and identify weaknesses in the current processes and systems. Mr. Sullivan assisted in the evaluations of cost and capability of potential solutions, which fed the recommendations.'}
         }
-''' 
+'''

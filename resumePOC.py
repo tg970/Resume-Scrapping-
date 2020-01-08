@@ -11,7 +11,7 @@ def createTxtFromDocx(file):
 
 def createDictfromTxt(file):
     dict = {}
-    
+
     '''
     # Scraping name
     nameArr = file.readline().strip().split()
@@ -20,20 +20,20 @@ def createDictfromTxt(file):
         nameDict["title"] = nameArr[2]
     dict["name"] = nameDict
     '''
-    
+
     nameArr = file.readline().strip().split(',')
     if len(nameArr) ==2:
         title = nameArr[1]
     else:
         title = None
-        
+
     nameArr = nameArr[0].split()
     if len(nameArr) == 3:
         nameDict = {"first":nameArr[0], "middle":nameArr[1], "last":nameArr[-1], "title":title}
     else:
         nameDict = {"first":nameArr[0], "middle":None, "last":nameArr[-1], "title":title}
     dict["name"] = nameDict
-    
+
     # Scraping introduction
     intro = file.readline().strip()
     while intro == "": # Skip through blank lines until the next field is reached
@@ -41,7 +41,7 @@ def createDictfromTxt(file):
         if intro == "Introductory paragraph":
             intro = file.readline().strip()
     dict["#INTRODUCTION"] = intro
-      
+
     count =0
     summary = file.readline().strip()
     while summary == "":
@@ -58,21 +58,21 @@ def createDictfromTxt(file):
         else:
             dict["#SUMMARY"] = dict["#SUMMARY"] + ", " + summary
         summary = file.readline().strip()
-        
-    # Scraping GT experience   
+
+    # Scraping GT experience
     gtCompany = file.readline().strip()
     while gtCompany == "":
         gtCompany = file.readline().strip()
-    
+
     gtTitleDate = file.readline().strip()
-    
+
     if gtTitleDate == "Grant Thornton LLP" or gtTitleDate == "":
         gtTitleDate = file.readline().strip()
-    
+
     while gtTitleDate == "":
         gtTitleDate = file.readline().strip()
     [gtTitle, gtDate] = gtTitleDate[:-1].split(" (")
-    
+
     gtEngagements = []
     for gtLine in file: # Will iterate from current line in file to end of file unless broken earlier
         gtLine = gtLine.strip()
@@ -82,10 +82,10 @@ def createDictfromTxt(file):
             break
         else:
             gtEngagements.append(createProjectFromParagraph(gtLine,True)) # Found a specific engagement, calling sub-parsing function
-    
+
     gtExp = {"company":gtCompany, "title":gtTitle, "date":gtDate, "engagements":gtEngagements}
     dict["gtExp"] = gtExp
-    
+
     # Scraping prior experience
     priorExp = []
     company = gtLine
@@ -101,24 +101,24 @@ def createDictfromTxt(file):
                 print('Engagement dates missing in ' + company)
                 date = 'N/A'
                 break
-        
+
         projects = []
         for line in file:
             line = line.strip()
             if line == "":
                 continue
             elif line.find("(") < 0: # The file has moved on to another former job
-                priorExp.append({"company":company, "title":title, "date": date, 
+                priorExp.append({"company":company, "title":title, "date": date,
                                  "projects":projects})
                 company = line
                 break
             else:
                 projects.append(createProjectFromParagraph(line))
-        
+
         if company == "Education": # Education has been reached
             dict["priorExp"] = priorExp
             break
-    
+
     eduArr = []
     eduArr = company
     eduArr = file.readline().strip()
@@ -137,7 +137,7 @@ def createDictfromTxt(file):
                         'minor':eduArr[4]}
                 dict["peducation"] = edu
                 break
-    
+
     # List of the remaining feild headers in the source template
     fieldList = ['Years of Federal Experience','Training and Certifications','Language Skills',
                  'International Experience','Computer Skills','Software','Hardware','Affiliations',
@@ -147,7 +147,7 @@ def createDictfromTxt(file):
     keyList = ['#YEARSEXPERIENCE','#CERTIFICATIONS','#LANGUAGES','#INTERNATIONAL','#COMPUTERSKILLS',
                '#SOFTWARE','#HARDWARE','#AFFILIATIONS','#MILSERV','#AWARDS','#RESEARCH','#TEACHING',
                '#PUBLICATIONS','#SECURITYCLEARANCE']
-     
+
     # Scrapes everything after education
     # set operating line
     line = eduArr
@@ -168,11 +168,11 @@ def createDictfromTxt(file):
                 line = file.readline().strip()
                 continue
             #Storing the correct line with the appropriate key
-            else:         
+            else:
                 dict[key] = line.strip()
-                break 
-                
-           
+                break
+
+
     return dict
 
 def createProjectFromParagraph(str, gt=False):
@@ -185,7 +185,7 @@ def createProjectFromParagraph(str, gt=False):
         return {"#AGENCY":arr[0], "#PROJECTDATES":'(' + arr[1] + ')', "#EXPERIENCE":arr[2]}
     else:
         return {"name":arr[0], "date":arr[1], "summary":arr[2]}
-    
+
 if __name__ == "__main__":
     ### Select the file to scrape
     # fileName = 'sample_resumes/' +"Rohan Tomer - GT resume" # do not include extension
@@ -196,13 +196,13 @@ if __name__ == "__main__":
     createTxtFromDocx(fileName)
     txtFile = open(fileName + ".txt", "r",encoding='utf-8') # opening for scraping
     infoDict = createDictfromTxt(txtFile) # This is the key value data structure
-    
+
     # print(infoDict["gtExp"]["engagements"][0])
     # print(infoDict)
     #exec(open("DocxTesting.py").read())
 
     # Exports infoDict as json that DocxTest.py uses
-    with open('infoDict.txt', 'w') as outfile:
+    with open('output_resumes/infoDict.txt', 'w') as outfile:
         json.dump(infoDict, outfile)
 
 # ------------------------------------------ Graveyard ---------------------------------------------
@@ -216,10 +216,10 @@ if __name__ == "__main__":
         elif fYrs == '' or fYrs =='Years of Federal Experience':
             fYrs = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#YEARSEXPERIENCE"] = fYrs
             break
-        
+
     train =  fYrs
     train = file.readline().strip()
     while True:
@@ -229,10 +229,10 @@ if __name__ == "__main__":
         elif train == '' or train =='Training and Certifications':
             train = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#TRAININGS"] = train
             break
-    
+
     lang =  train
     lang = file.readline().strip()
     while True:
@@ -242,11 +242,11 @@ if __name__ == "__main__":
         elif lang == '' or lang =='Language Skills':
             lang = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#LANGUAGES"] = lang
-            break    
-        
-        
+            break
+
+
     intern =  lang
     intern = file.readline().strip()
     while True:
@@ -256,10 +256,10 @@ if __name__ == "__main__":
         elif intern == '' or intern =='International Experience':
             intern = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#INTERNATIONAL"] = intern
-            break  
-        
+            break
+
     compSkill =  intern
     compSkill = file.readline().strip()
     while True:
@@ -269,10 +269,10 @@ if __name__ == "__main__":
         elif compSkill == '' or compSkill =='Computer Skills':
             compSkill = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#COMPUTERSKILLS"] = compSkill
-            break  
-        
+            break
+
     software =  compSkill
     software = file.readline().strip()
     while True:
@@ -282,8 +282,7 @@ if __name__ == "__main__":
         elif software == '' or software =='Software':
             software = file.readline().strip()
             continue
-        else:            
+        else:
             dict["#SOFTWARE"] = software
-            break 
+            break
         '''
-    
